@@ -97,8 +97,8 @@ export default {
                 elizaLogger.error("Error in GET_PRICE handler:", error);
                 if (callback) {
                     callback({
-                        text: `Error fetching price: ${error.message}`,
-                        content: { error: error.message },
+                        text: `Error fetching price: ${error instanceof Error ? error.message : 'Unknown error'}`,
+                        content: { error: error instanceof Error ? error.message : 'Unknown error' },
                     });
                 }
                 return false;
@@ -107,8 +107,8 @@ export default {
             elizaLogger.error("Error in GET_PRICE handler:", error);
             if (callback) {
                 callback({
-                    text: `Error fetching price: ${error.message}`,
-                    content: { error: error.message },
+                    text: `Error fetching price: ${error instanceof Error ? error.message : 'Unknown error'}`,
+                    content: { error: error instanceof Error ? error.message : 'Unknown error' },
                 });
             }
             return false;
