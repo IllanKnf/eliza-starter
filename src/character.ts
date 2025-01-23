@@ -1,9 +1,10 @@
 import { Character, Clients, defaultCharacter, ModelProviderName } from "@elizaos/core";
+import coinmarketcapPlugin from "@elizaos/plugin-coinmarketcap";
 
 export const character: Character = {
     ...defaultCharacter,
     name: "CryptoAnalyst",
-    plugins: [],
+    plugins: [coinmarketcapPlugin],
     clients: [],
     modelProvider: ModelProviderName.OPENROUTER,
     settings: {

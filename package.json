@@ -20,6 +20,7 @@
     "@elizaos/client-twitter": "0.1.7",
     "@elizaos/core": "0.1.7",
     "@elizaos/plugin-bootstrap": "0.1.7",
+    "@elizaos/plugin-coinmarketcap": "workspace:*",
     "@elizaos/plugin-image-generation": "0.1.7",
     "@elizaos/plugin-node": "0.1.7",
     "@elizaos/plugin-solana": "0.1.7",
