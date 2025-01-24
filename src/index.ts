@@ -23,6 +23,7 @@ import {
   parseArguments,
 } from "./config/index.ts";
 import { initializeDatabase } from "./database/index.ts";
+import { plugins } from "./plugins/index.ts";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -49,6 +50,14 @@ export function createAgent(
 
   nodePlugin ??= createNodePlugin();
 
+  // Convert plugin names to actual plugin instances
+  const characterPlugins = character.plugins?.map(pluginName => {
+    if (typeof pluginName === 'string') {
+      return plugins[pluginName];
+    }
+    return pluginName;
+  }) || [];
+
   return new AgentRuntime({
     databaseAdapter: db,
     token,
@@ -58,6 +67,7 @@ export function createAgent(
     plugins: [
       bootstrapPlugin,
       nodePlugin,
+      ...characterPlugins,
       character.settings?.secrets?.WALLET_PUBLIC_KEY ? solanaPlugin : null,
     ].filter(Boolean),
     providers: [],

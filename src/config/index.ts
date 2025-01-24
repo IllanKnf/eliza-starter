@@ -1,4 +1,3 @@
-
 import { Character, ModelProviderName, settings, validateCharacterConfig } from "@elizaos/core";
 import fs from "fs";
 import path from "path";
@@ -25,35 +24,40 @@ export function parseArguments(): {
   }
 }
 
-export async function loadCharacters(
-  charactersArg: string
-): Promise<Character[]> {
-  let characterPaths = charactersArg?.split(",").map((filePath) => {
-    if (path.basename(filePath) === filePath) {
-      filePath = "../characters/" + filePath;
+function interpolateEnvVars(obj: any): any {
+  if (typeof obj === 'string') {
+    return obj.replace(/\${([^}]+)}/g, (_, p1) => process.env[p1] || '');
+  }
+  if (Array.isArray(obj)) {
+    return obj.map(item => interpolateEnvVars(item));
+  }
+  if (obj && typeof obj === 'object') {
+    const result = {};
+    for (const [key, value] of Object.entries(obj)) {
+      result[key] = interpolateEnvVars(value);
     }
-    return path.resolve(process.cwd(), filePath.trim());
-  });
+    return result;
+  }
+  return obj;
+}
 
-  const loadedCharacters = [];
+export async function loadCharacters(charactersArg: string): Promise<Character[]> {
+  const characters: Character[] = [];
+  const paths = charactersArg.split(',');
 
-  if (characterPaths?.length > 0) {
-    for (const path of characterPaths) {
-      try {
-        const character = JSON.parse(fs.readFileSync(path, "utf8"));
-
-        validateCharacterConfig(character);
-
-        loadedCharacters.push(character);
-      } catch (e) {
-        console.error(`Error loading character from ${path}: ${e}`);
-        // don't continue to load if a specified file is not found
-        process.exit(1);
-      }
+  for (const characterPath of paths) {
+    try {
+      const content = await fs.promises.readFile(characterPath, 'utf-8');
+      const character = JSON.parse(content);
+      // Interpolate environment variables in the character configuration
+      const processedCharacter = interpolateEnvVars(character);
+      characters.push(processedCharacter);
+    } catch (error) {
+      throw new Error(`Error loading character from ${characterPath}: ${error}`);
     }
   }
 
-  return loadedCharacters;
+  return characters;
 }
 
 export function getTokenForProvider(
