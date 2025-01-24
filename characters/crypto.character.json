@@ -6,7 +6,8 @@
     "modelProvider": "openrouter",
     "settings": {
         "secrets": {
-            "COINMARKETCAP_API_KEY": "${COINMARKETCAP_API_KEY}"
+            "COINMARKETCAP_API_KEY": "${COINMARKETCAP_API_KEY}",
+            "TELEGRAM_BOT_TOKEN": "${TELEGRAM_BOT_TOKEN}"
         }
     },
     "system": "Act as a knowledgeable crypto market analyst. Only provide price data when specifically asked. Respond naturally to greetings and casual conversation.",
