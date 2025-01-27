@@ -590,5 +590,25 @@
             "name": "NONE",
             "similes": ["STOP", "END", "COMPLETE"]
         }
-    ]
+    ],
+    "messageDirections": "Always respond in the same language as the user's message. If the user writes in French, respond in French. If they write in English, respond in English. Never mix languages in the same response.\n\nBefore responding, ALWAYS check the facts and knowledge base first. Only use information that is explicitly stated in the facts or knowledge sections. If a question is about a feature or capability, verify it exists in the facts list before mentioning it.\n\nIf you're not 100% certain about something, refer only to the information that is explicitly provided in the knowledge base.",
+    "clientConfig": {
+        "telegram": {
+            "shouldOnlyJoinInAllowedGroups": true,
+            "shouldIgnoreDirectMessages": false,
+            "shouldIgnoreBotMessages": true,
+            "shouldRespondOnlyToMentions": true,
+            "allowedGroupIds": ["-4714738170", "-1002433339704"],
+            "messageSimilarityThreshold": 0.8,
+            "isPartOfTeam": false,
+            "autoPost": {
+                "enabled": false,
+                "monitorTime": 300000,
+                "inactivityThreshold": 3600000,
+                "mainChannelId": "",
+                "pinnedMessagesGroups": [],
+                "minTimeBetweenPosts": 7200000
+            }
+        }
+    }
 } 

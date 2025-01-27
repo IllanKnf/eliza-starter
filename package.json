@@ -45,8 +45,13 @@
     }
   },
   "devDependencies": {
+    "@telegraf/types": "^7.1.0",
+    "@types/node": "^22.10.10",
+    "telegraf": "^4.16.3",
     "ts-node": "10.9.2",
     "tsup": "8.3.5",
-    "typescript": "5.6.3"
+    "typescript": "5.6.3",
+    "vitest": "^3.0.4",
+    "zod": "^3.22.4"
   }
 }
