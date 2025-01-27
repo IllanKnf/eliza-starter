@@ -597,8 +597,8 @@
             "shouldOnlyJoinInAllowedGroups": true,
             "shouldIgnoreDirectMessages": false,
             "shouldIgnoreBotMessages": true,
-            "shouldRespondOnlyToMentions": true,
-            "allowedGroupIds": ["-4714738170", "-1002433339704"],
+            "shouldRespondOnlyToMentions": false,
+            "allowedGroupIds": ["-4714738170", "-1002433339704", "5238465938"],
             "messageSimilarityThreshold": 0.8,
             "isPartOfTeam": false,
             "autoPost": {
